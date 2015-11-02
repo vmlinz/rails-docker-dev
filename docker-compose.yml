@@ -1,9 +1,8 @@
-db:
-  image: postgres
-  ports:
-    - "5432"
 web:
   build: .
+  command: ./script/start.sh
+  volumes:
+    - .:/usr/src/app
   volumes_from:
     - bundler-cache
   ports:
@@ -14,4 +13,8 @@ bundler-cache:
   image: ruby:2.2
   command: /bin/true
   volumes:
-    - /usr/local/bundle
+    - /var/lib/bundle
+db:
+  image: postgres
+  ports:
+    - "5432"
